@@ -1,0 +1,12 @@
+# Core scientific stack
+pandas>=2.0
+numpy>=1.25
+matplotlib>=3.8
+scikit-learn>=1.4
+
+# Excel / Parquet IO
+openpyxl>=3.1
+pyarrow>=15.0
+
+# Optional but helpful
+seaborn>=0.13

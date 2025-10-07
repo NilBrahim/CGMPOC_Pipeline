@@ -1,0 +1,326 @@
+
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>PGR POC — Ridge (interpretable)</title>
+<style>
+body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 24px; }
+h1, h2 { margin: 8px 0; }
+small { color:#666; }
+table { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 10px; border-bottom: 1px solid #eee; text-align: left; }
+</style>
+</head>
+<body>
+  <h1>PGR POC — Predicting ΔPeak (mg/dL)</h1>
+  <small>Model: StandardScaler + Ridge (LOPO by participant). Target: delta_peak in first 120 min.</small>
+
+  <h2>Per-fold metrics (LOPO)</h2>
+  <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>left_out_pid</th>
+      <th>n_test_meals</th>
+      <th>rmse</th>
+      <th>mae</th>
+      <th>r2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>17</td>
+      <td>45</td>
+      <td>27.877013</td>
+      <td>21.545024</td>
+      <td>-0.628668</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>41</td>
+      <td>25.022027</td>
+      <td>19.803901</td>
+      <td>-0.409998</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>46</td>
+      <td>36.350735</td>
+      <td>30.357608</td>
+      <td>-3.564388</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>25</td>
+      <td>67.133172</td>
+      <td>54.965782</td>
+      <td>-0.150901</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>40</td>
+      <td>29.352611</td>
+      <td>22.397314</td>
+      <td>-0.144679</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>27</td>
+      <td>60.092816</td>
+      <td>44.788629</td>
+      <td>-0.076537</td>
+    </tr>
+  </tbody>
+</table>
+  <p><b>Overall</b> — RMSE: 40.97 &nbsp; MAE: 32.31 &nbsp; R²: -0.829</p>
+
+  <h2>Average coefficients (original units)</h2>
+  <p>Higher positive values → larger postprandial rise; negative values → attenuate rise.</p>
+  <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>avg_coef</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>gap_prev_meal_hr</th>
+      <td>2.162114</td>
+    </tr>
+    <tr>
+      <th>baseline_sd</th>
+      <td>0.608261</td>
+    </tr>
+    <tr>
+      <th>carbs_g</th>
+      <td>0.521143</td>
+    </tr>
+    <tr>
+      <th>hr_mean_prev_60m</th>
+      <td>0.296353</td>
+    </tr>
+    <tr>
+      <th>fat_g</th>
+      <td>0.202145</td>
+    </tr>
+    <tr>
+      <th>baseline_mgdl</th>
+      <td>0.146337</td>
+    </tr>
+    <tr>
+      <th>protein_g</th>
+      <td>0.104196</td>
+    </tr>
+    <tr>
+      <th>steps_prev_120m</th>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>calories</th>
+      <td>-0.036932</td>
+    </tr>
+    <tr>
+      <th>hour</th>
+      <td>-0.619891</td>
+    </tr>
+    <tr>
+      <th>fiber_g</th>
+      <td>-1.392661</td>
+    </tr>
+  </tbody>
+</table>
+
+  <h2>Sample predictions (first 30)</h2>
+  <table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Person_ID</th>
+      <th>meal_time</th>
+      <th>y_true</th>
+      <th>y_pred</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>17</td>
+      <td>2023-10-10 13:20</td>
+      <td>89.066667</td>
+      <td>2.700080</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-10 20:30</td>
+      <td>1.400000</td>
+      <td>44.610002</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-10 22:40</td>
+      <td>22.400000</td>
+      <td>36.078277</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-11 10:21</td>
+      <td>69.500000</td>
+      <td>76.746955</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-11 14:11</td>
+      <td>59.300000</td>
+      <td>45.258201</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-11 20:42</td>
+      <td>7.000000</td>
+      <td>40.552055</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-11 22:15</td>
+      <td>41.600000</td>
+      <td>34.900562</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-11 22:35</td>
+      <td>40.800000</td>
+      <td>31.525554</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-12 11:39</td>
+      <td>68.700000</td>
+      <td>77.155674</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-12 14:43</td>
+      <td>2.500000</td>
+      <td>27.567795</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-12 20:27</td>
+      <td>5.800000</td>
+      <td>38.015250</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-12 21:50</td>
+      <td>32.200000</td>
+      <td>46.617465</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-12 22:17</td>
+      <td>30.000000</td>
+      <td>23.025226</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-13 11:36</td>
+      <td>36.900000</td>
+      <td>77.686937</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-13 15:05</td>
+      <td>38.500000</td>
+      <td>57.616852</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-13 19:01</td>
+      <td>20.800000</td>
+      <td>50.159382</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-13 22:07</td>
+      <td>33.500000</td>
+      <td>37.917446</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-13 22:15</td>
+      <td>33.100000</td>
+      <td>31.644323</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-14 08:27</td>
+      <td>50.900000</td>
+      <td>57.930304</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-14 13:04</td>
+      <td>9.400000</td>
+      <td>28.261137</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-14 17:59</td>
+      <td>12.400000</td>
+      <td>42.760005</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-14 18:47</td>
+      <td>1.900000</td>
+      <td>54.598690</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-14 18:54</td>
+      <td>5.700000</td>
+      <td>30.917913</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-14 21:00</td>
+      <td>45.900000</td>
+      <td>30.780919</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-15 11:00</td>
+      <td>29.400000</td>
+      <td>70.028966</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-15 14:06</td>
+      <td>54.400000</td>
+      <td>47.214910</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-15 19:42</td>
+      <td>37.400000</td>
+      <td>53.293880</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-15 20:03</td>
+      <td>35.300000</td>
+      <td>36.300493</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-16 01:19</td>
+      <td>59.400000</td>
+      <td>34.703494</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-16 09:41</td>
+      <td>68.200000</td>
+      <td>65.127923</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

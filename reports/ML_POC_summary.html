@@ -1,0 +1,315 @@
+
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>ML POC — Daily Metrics Classifier</title>
+<style>
+body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 24px; }
+h1, h2 { margin: 8px 0; }
+small { color:#666; }
+table { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 10px; border-bottom: 1px solid #eee; text-align: left; }
+img { max-width: 420px; height: auto; border: 1px solid #eee; border-radius: 8px; padding: 4px; }
+</style>
+</head>
+<body>
+  <h1>ML POC — Daily Metrics Classifier</h1>
+  <small>Validation: Leave-One-Participant-Out; Model: StandardScaler + LogisticRegression (liblinear, class_weight=balanced)</small>
+
+  <h2>Per-fold metrics (LOPO)</h2>
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>left_out_pid</th>
+      <th>n_test_days</th>
+      <th>accuracy</th>
+      <th>macro_f1</th>
+      <th>balanced_acc</th>
+      <th>train_healthy</th>
+      <th>train_prediabetes</th>
+      <th>train_t2d</th>
+      <th>test_healthy</th>
+      <th>test_prediabetes</th>
+      <th>test_t2d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>17</td>
+      <td>10</td>
+      <td>0.100000</td>
+      <td>0.090909</td>
+      <td>0.100000</td>
+      <td>9</td>
+      <td>20</td>
+      <td>18</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>11</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>19</td>
+      <td>9</td>
+      <td>18</td>
+      <td>0</td>
+      <td>11</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>9</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>10</td>
+      <td>20</td>
+      <td>18</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>9</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>19</td>
+      <td>20</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>9</td>
+      <td>0.777778</td>
+      <td>0.437500</td>
+      <td>0.777778</td>
+      <td>19</td>
+      <td>11</td>
+      <td>18</td>
+      <td>0</td>
+      <td>9</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>9</td>
+      <td>0.777778</td>
+      <td>0.437500</td>
+      <td>0.777778</td>
+      <td>19</td>
+      <td>20</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+  <p><b>Overall</b> — Accuracy: 0.443 &nbsp;&nbsp; Macro-F1: 0.328 &nbsp;&nbsp; Balanced Acc: 0.443</p>
+
+  <h2>Confusion Matrix</h2>
+  <img src="../data/derived/ml_poc_confusion_matrix.png" alt="confusion matrix">
+
+  <h2>Sample Predictions (first 30 rows)</h2>
+  <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Person_ID</th>
+      <th>date</th>
+      <th>true_label</th>
+      <th>pred_label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>17</td>
+      <td>2023-10-11</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-12</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-13</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-14</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-15</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-16</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-17</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-18</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-19</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>2023-10-20</td>
+      <td>Healthy</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2021-03-29</td>
+      <td>Pre-diabetes</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2021-03-30</td>
+      <td>Pre-diabetes</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2021-03-31</td>
+      <td>Pre-diabetes</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2021-04-01</td>
+      <td>Pre-diabetes</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2021-04-02</td>
+      <td>Pre-diabetes</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2021-04-03</td>
+      <td>Pre-diabetes</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2021-04-04</td>
+      <td>Pre-diabetes</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2021-04-05</td>
+      <td>Pre-diabetes</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2021-04-06</td>
+      <td>Pre-diabetes</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2021-04-07</td>
+      <td>Pre-diabetes</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>2021-04-08</td>
+      <td>Pre-diabetes</td>
+      <td>Healthy</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>2022-03-03</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>2022-03-04</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>2022-03-05</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>2022-03-06</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>2022-03-07</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>2022-03-08</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>2022-03-09</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>2022-03-10</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>2022-03-11</td>
+      <td>Healthy</td>
+      <td>Pre-diabetes</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

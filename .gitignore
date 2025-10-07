@@ -1,0 +1,18 @@
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environment
+.venv/
+
+# Ignore data (raw + intermediate + derived)
+data/raw/
+data/interim/
+data/derived/
+
+# Ignore Jupyter checkpoint files
+.ipynb_checkpoints/
+
+# macOS hidden files
+.DS_Store

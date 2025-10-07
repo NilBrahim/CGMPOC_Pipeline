@@ -1,0 +1,158 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CGM POC — 6-Participant Prototype</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 24px; }
+h1 { margin-bottom: 4px; }
+.subtitle { color: #666; margin-bottom: 24px; }
+.data-table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+.data-table th, .data-table td { padding: 8px 10px; border-bottom: 1px solid #eee; text-align: right; }
+.data-table th:first-child, .data-table td:first-child { text-align: left; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 24px; }
+.card { border: 1px solid #eee; border-radius: 10px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.card-title { font-weight: 600; margin-bottom: 8px; }
+.card img { width: 100%; height: auto; border-radius: 8px; }
+.footer { color:#777; margin-top: 24px; font-size: 0.9em; }
+.small { color:#777; font-size: 0.9em; }
+</style>
+</head>
+<body>
+  <h1>CGM POC — 6-Participant Prototype</h1>
+  <div class="subtitle small">Generated: 2025-10-05 17:16</div>
+  <p>Proof-of-concept with <b>6</b> participants to validate the pipeline: I/O, cleaning, 5-min resampling, CGM metrics (TIR / Mean / CV / GMI), and reporting.</p><p>Class counts — Healthy: <b>2</b>, Pre-diabetes: <b>2</b>, T2D: <b>2</b>.</p>
+  <h2>Participant Summary</h2>
+  <table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Participant</th>
+      <th>HbA1c (%)</th>
+      <th>MetabolicState</th>
+      <th>Mean (mg/dL)</th>
+      <th>SD (mg/dL)</th>
+      <th>CV (%)</th>
+      <th>GMI (%)</th>
+      <th>TIR 70–180 (%)</th>
+      <th>% &lt;70</th>
+      <th>% &gt;180</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>17</td>
+      <td>5.0</td>
+      <td>Healthy</td>
+      <td>126.06</td>
+      <td>16.15</td>
+      <td>13.17</td>
+      <td>6.33</td>
+      <td>97.85</td>
+      <td>1.28</td>
+      <td>0.87</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>4.6</td>
+      <td>Healthy</td>
+      <td>106.35</td>
+      <td>13.37</td>
+      <td>12.55</td>
+      <td>5.85</td>
+      <td>99.61</td>
+      <td>0.39</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>5.9</td>
+      <td>Pre-diabetes</td>
+      <td>115.53</td>
+      <td>15.21</td>
+      <td>13.17</td>
+      <td>6.07</td>
+      <td>99.49</td>
+      <td>0.03</td>
+      <td>0.47</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>6.0</td>
+      <td>Pre-diabetes</td>
+      <td>131.89</td>
+      <td>26.31</td>
+      <td>19.93</td>
+      <td>6.46</td>
+      <td>93.17</td>
+      <td>0.04</td>
+      <td>6.79</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>8.5</td>
+      <td>T2D</td>
+      <td>222.56</td>
+      <td>43.46</td>
+      <td>19.69</td>
+      <td>8.63</td>
+      <td>15.55</td>
+      <td>0.00</td>
+      <td>84.45</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>7.4</td>
+      <td>T2D</td>
+      <td>187.59</td>
+      <td>48.32</td>
+      <td>25.84</td>
+      <td>7.80</td>
+      <td>51.27</td>
+      <td>0.31</td>
+      <td>48.42</td>
+    </tr>
+  </tbody>
+</table>
+  <h2>Example Day — 5-min CGM Traces</h2>
+  <div class='cards'>
+            <div class="card">
+              <div class="card-title">Participant 17 — 2023-10-11</div>
+              <img src="../data/derived/p17_2023-10-11_trace.png" alt="trace p17">
+            </div>
+            
+
+            <div class="card">
+              <div class="card-title">Participant 22 — 2021-03-29</div>
+              <img src="../data/derived/p22_2021-03-29_trace.png" alt="trace p22">
+            </div>
+            
+
+            <div class="card">
+              <div class="card-title">Participant 34 — 2022-03-03</div>
+              <img src="../data/derived/p34_2022-03-03_trace.png" alt="trace p34">
+            </div>
+            
+
+            <div class="card">
+              <div class="card-title">Participant 35 — 2024-12-13</div>
+              <img src="../data/derived/p35_2024-12-13_trace.png" alt="trace p35">
+            </div>
+            
+
+            <div class="card">
+              <div class="card-title">Participant 44 — 2022-10-18</div>
+              <img src="../data/derived/p44_2022-10-18_trace.png" alt="trace p44">
+            </div>
+            
+
+            <div class="card">
+              <div class="card-title">Participant 46 — 2025-05-02</div>
+              <img src="../data/derived/p46_2025-05-02_trace.png" alt="trace p46">
+            </div>
+            </div>
+  <div class="footer">
+    <p class="small">Notes: TIR=70–180 mg/dL. CV = 100×SD/Mean. GMI = 3.31 + 0.02392×Mean(mg/dL).</p>
+  </div>
+</body>
+</html>
