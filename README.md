@@ -1,7 +1,7 @@
 # CGMPOC_Pipeline — Interpretable Machine Learning for Postprandial Glucose Prediction
 
 This repository contains a **proof-of-concept pipeline** demonstrating how interpretable machine learning (ML) can be used to model and explain **postprandial glucose responses (PPGR)** from multimodal health data.  
-The project was developed as part of a **Master of Research (MRes)** at the *University of Salford* (2026–2027).
+The project was developed as part of a **Master of Research (MRes)** .
 
 ---
 
